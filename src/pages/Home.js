@@ -1,13 +1,16 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 import '../Home.css';
+import RecipeItem from '../components/RecipeItem';
 
-const Home = () => {
+const Home = ({addFavorite}) => {
     
     const handleSearch = () => {
         
         console.log("Searched for recipes.")
       };
+
+    const fakeRecipe = {id:0, title:"Hamburger with onion", ingredients:"meat,onion"};
 
     return(
         <div className="home-wrapper">
@@ -18,6 +21,9 @@ const Home = () => {
             </h1>
             <SearchBar searchRecipe={handleSearch}/>
         </div>
+
+        <RecipeItem recipe={fakeRecipe} addFavorite={addFavorite}/>
+
         </div>
     );
 };
