@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
-const SearchBar = ({onSearch}) => {
+const SearchBar = ({searchRecipe}) => {
     const [query, setQuery] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSearch(query);
+        searchRecipe(query);
         setQuery('');
     }
 
