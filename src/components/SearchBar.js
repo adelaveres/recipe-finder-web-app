@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
-const SearchBar = ({searchRecipe}) => {
+const SearchBar = ({findRecipes}) => {
     const [query, setQuery] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        searchRecipe(query);
+        findRecipes(query);
         setQuery('');
     }
 
@@ -15,7 +15,7 @@ const SearchBar = ({searchRecipe}) => {
                 type="text"
                 value={query}
                 onChange={(e)=>setQuery(e.target.value)}
-                placeholder='What do you want to eat?'
+                placeholder='What do you feel like eating?'
                 className="flex-grow p-2 border rounded"
             />
             <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded">

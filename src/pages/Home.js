@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import '../Home.css';
 import RecipesList from '../components/RecipesList';
+import { fetchRecipes } from '../api/recipeAPI';
 
-const Home = ({addFavorite}) => {
+const Home = ({ addFavorite }) => {
     
-    const handleSearch = () => {
-        
-        console.log("Searched for recipes.")
+    const [recipes, setRecipes] = useState([]);
+
+    const handleSearch = async (query) => {
+        const results = await fetchRecipes(query);
+        // console.log("Recipes: \n"+ results );
+        setRecipes(results);
       };
 
     return(
@@ -17,10 +21,11 @@ const Home = ({addFavorite}) => {
             <h1 className="text-2xl font-bold">
                 Recipe Finder
             </h1>
-            <SearchBar searchRecipe={handleSearch}/>
+            <SearchBar findRecipes={handleSearch}/>
+            <RecipesList recipes={recipes} addFavorite={addFavorite}/>
         </div>
 
-        <RecipesList addFavorite={addFavorite}/>
+        
 
         </div>
     );

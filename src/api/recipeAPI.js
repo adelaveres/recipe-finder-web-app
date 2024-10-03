@@ -1,3 +1,78 @@
-import axios from 'axios';
 
-const API_URL = 
+import { GoogleGenerativeAI, SchemaType  } from "@google/generative-ai";
+
+export const fetchRecipes = async (query) => {
+    
+    // const genAI = new GoogleGenerativeAI(process.env.REACT_APP_API_KEY);
+    // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // const prompt = `Find 5 recipes with ${query}`;
+
+
+    // try {
+    //     const result = await model.generateContent(prompt);
+    //     console.log(result.response);
+    //     // return response.data.recipes;
+    // } catch (error) {
+    //     console.error('Error fetching recipe:', error);
+    // }
+
+
+    const genAI = new GoogleGenerativeAI(process.env.REACT_APP_API_KEY);
+
+
+    const schema = {
+        description: "List of recipes",
+        type: SchemaType.ARRAY,
+        items: {
+            type: SchemaType.OBJECT,
+            properties: {
+                id: {
+                    type: SchemaType.STRING,
+                    description: "Unique identifier for the recipe",
+                    nullable: false,
+                },
+                title: {
+                    type: SchemaType.STRING,
+                    description: "Name of the recipe",
+                    nullable: false,
+                },
+                ingredients: {
+                    type: SchemaType.ARRAY,
+                    description: "List of ingredients required for the recipe",
+                    items: {
+                        type: SchemaType.STRING,
+                    },
+                    nullable: false,
+                },
+                instructions: {
+                    type: SchemaType.STRING,
+                    description: "Instructions for preparing the recipe",
+                    nullable: false,
+                },
+            },
+            required: ["id", "title", "ingredients", "instructions"],
+        },
+    };
+
+    const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-pro",
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: schema,
+        },
+      });
+
+    //   const prompt = `Find 3 recipes with ${query}`;
+      const prompt = `Find 3 recipes with avocado`;
+
+      try {
+        const result = await model.generateContent(prompt);
+        console.log(result.response.text());
+        const recipes = JSON.parse(result.response.text());
+
+        return recipes;
+    } catch (error) {
+        console.error('Error fetching recipe:', error);
+    }
+
+};
