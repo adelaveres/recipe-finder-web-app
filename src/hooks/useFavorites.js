@@ -6,6 +6,7 @@ const useFavorites =  () => {
 
     const addFavorite = (recipe) => {
         setFavorites((prev) => [...prev, recipe]);
+        console.log("Favorites: "+favorites);
     };
 
     const removeFavorite = (recipeId) => {

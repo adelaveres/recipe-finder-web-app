@@ -10,16 +10,17 @@ const SearchBar = ({findRecipes}) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex mb-4">
+        <form onSubmit={handleSubmit} className="flex mb-20 border rounded-[20px]">
             <input
                 type="text"
                 value={query}
                 onChange={(e)=>setQuery(e.target.value)}
                 placeholder='What do you feel like eating?'
-                className="flex-grow p-2 border rounded"
+                className="flex-grow p-2 rounded-[20px]"
             />
-            <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded">
-                Search
+            
+            <button type="submit" className="ml-2 p-2">
+                <i className="fa fa-search" aria-hidden="true"></i>
             </button>
         </form>
     );

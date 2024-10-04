@@ -1,0 +1,29 @@
+.recipe-details{
+    position: relative; 
+    width: inherit;
+    
+}
+.recipe-info{
+    padding-top: 5px;
+    width: 250px;
+}
+.heart{
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 38%;
+    margin: 0.3em;
+    font-size: large;
+}
+.heart:hover{
+    cursor: pointer;
+}
+.full-heart{
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 38%;
+    margin: 0.3em;
+    color: rgba(87, 4, 87, 0.693);
+    font-size: large;
+}

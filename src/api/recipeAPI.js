@@ -1,21 +1,11 @@
 
 import { GoogleGenerativeAI, SchemaType  } from "@google/generative-ai";
 
-export const fetchRecipes = async (query) => {
-    
-    // const genAI = new GoogleGenerativeAI(process.env.REACT_APP_API_KEY);
-    // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    // const prompt = `Find 5 recipes with ${query}`;
 
 
-    // try {
-    //     const result = await model.generateContent(prompt);
-    //     console.log(result.response);
-    //     // return response.data.recipes;
-    // } catch (error) {
-    //     console.error('Error fetching recipe:', error);
-    // }
+export const fetchRecipes = async (query, setLoading) => {
 
+    setLoading(true);
 
     const genAI = new GoogleGenerativeAI(process.env.REACT_APP_API_KEY);
 
@@ -34,6 +24,11 @@ export const fetchRecipes = async (query) => {
                 title: {
                     type: SchemaType.STRING,
                     description: "Name of the recipe",
+                    nullable: false,
+                },
+                time: {
+                    type: SchemaType.NUMBER,
+                    description: "Estimated cooking/preparation time in minutes",
                     nullable: false,
                 },
                 ingredients: {
@@ -62,8 +57,7 @@ export const fetchRecipes = async (query) => {
         },
       });
 
-    //   const prompt = `Find 3 recipes with ${query}`;
-      const prompt = `Find 3 recipes with avocado`;
+      const prompt = `Find 3 recipes with ${query}`;
 
       try {
         const result = await model.generateContent(prompt);
@@ -73,6 +67,8 @@ export const fetchRecipes = async (query) => {
         return recipes;
     } catch (error) {
         console.error('Error fetching recipe:', error);
+    } finally {
+        setLoading(false);
     }
 
 };
