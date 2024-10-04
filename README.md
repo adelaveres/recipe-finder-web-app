@@ -5,11 +5,11 @@ Home page:
 ![Home page](public/Screenshot-first-page.png)
 
 Searching for recipes: (e.g. 'avocado')
-![Loading page](public/Screenshot-loading)
+![Loading page](public/Screenshot-loading.png)
 
 Suggested Recipes:
-![Suggested Recipes](public/Screenshot-search-res-avocado)
+![Suggested Recipes](public/Screenshot-search-res-avocado.png)
 
 Alternative Recipes (Selected 'I don't like these button')
 - also selecting recipes as favorites:
-![Alternatives](public/Screenshot-alternatives-add-fav)
+![Alternatives](public/Screenshot-alternatives-add-fav.png)
