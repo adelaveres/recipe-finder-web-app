@@ -13,3 +13,6 @@ Suggested Recipes:
 Alternative Recipes (Selected 'I don't like these button')
 - also selecting recipes as favorites:
 ![Alternatives](public/Screenshot-alternatives-add-fav.png)
+
+Favorites list:
+![Favorites](public/Favorites-list.png)
