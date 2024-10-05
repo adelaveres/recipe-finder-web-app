@@ -2,13 +2,14 @@ import React from 'react';
 import RecipeItem from './RecipeItem';
 
 
-const RecipesList = ({ findRecipes, recipes, addFavorite, loading, query }) => {
+const RecipesList = ({ findRecipes, recipes, addFavorite, query, setRecipes }) => {
 
     // const fakeRecipe = {id:0, title:"Hamburger with onion", ingredients:"meat,onion"};
 
     const handleClick = (e) => {
         e.preventDefault();
-        findRecipes(query);
+        findRecipes("spicy "+query);
+        setRecipes([]);
         // setQuery('');
     }
 

@@ -12,12 +12,11 @@ const Home = () => {
     const [loading, setLoading] = useState(false);
     const {favorites, addFavorite, removeFavorite} = useFavorites();
     let currentQuery = '';
-    
-    
-    // addFavorite(favRecipe1);
+    const [displayFavorites, setDisplayFavorites] = useState(false);
 
 
     const handleSearch = async (query) => {
+        setDisplayFavorites(false);
         currentQuery = query;
         const results = await fetchRecipes(query, setLoading);
         // const results = [
@@ -29,6 +28,11 @@ const Home = () => {
         setRecipes(results);
       };
 
+      const showFavorites = (e) => {
+        e.preventDefault();
+        setDisplayFavorites(true);
+        setRecipes([]);
+    }
 
     useEffect(() => {
         console.log("Favorites changed: ", favorites);
@@ -60,12 +64,29 @@ const Home = () => {
                             )
                     )
                     :(
-                        <div>
-                            <h1 className="text-3xl font-extrabold pb-4">Suggested Recipes</h1>
-                            <RecipesList findRecipes={handleSearch} recipes={recipes} addFavorite={addFavorite} loading={loading} query={currentQuery}/>
-                            {/* <a href="">See updated favorites list.</a> */}
+                        (displayFavorites)?
+                        (   
+                            <div>
+                                <h1 className="text-3xl font-extrabold pb-4">Favorites</h1>
+                                <FavoriteRecipes favorites={favorites} removeFavorite={removeFavorite}/>
+                            </div>
+                        )
+                        :(
+                            <div>
+                                <h1 className="text-3xl font-extrabold pb-4">Suggested Recipes</h1>
+                                <RecipesList findRecipes={handleSearch} recipes={recipes} addFavorite={addFavorite} query={currentQuery} setRecipes={setRecipes}/>
+                                
+                                <div className="w-full">
+                                    <a href="" 
+                                        className="block mt-8 mx-auto w-[120px] text-sm italic text-blue-700" 
+                                        onClick={showFavorites}
+                                    >See favorites list.</a>
+                                </div>
+                                
+                                
+                            </div>
                             
-                        </div>
+                        )
                     )
                 
                 }
